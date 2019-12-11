@@ -1,20 +1,11 @@
 <?php 
 session_start();
-$id = $_SESSION['id'] ;
-$sel_accnt = "select * 
-              from accounts as acc
-              join role as r on r.id = acc.id_role
-              where acc.id = $id ";
-$host = "127.0.0.1";
-$dbname = "db2";
-$dbUsername = "root";
-$dbPass = "";
-$conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", 
-					$dbUsername, 
-					$dbPass);
-$stmt = $conn->prepare($sel_accnt);
-$stmt->execute();
-$acc = $stmt->fetch();
+include('./cart/add-cart.php');
+if(!isset($_SESSION['username'])){
+    header('location: formlogin.php');
+}
+include('./show/show-account.php');
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +52,7 @@ $acc = $stmt->fetch();
                 <div class="grid-ctnn">
                     <p><span>Họ tên : </span>&ensp; <?php echo $acc[4] ?></p>
                     <p><span>Email : </span>&ensp; <?php echo $acc['email'] ?></p>
-                    <p><span>Mật khẩu : </span>&ensp; **************** &ensp;&ensp;&ensp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href="">Chỉnh sửa</a></p>
+                    <p><span>Mật khẩu : </span>&ensp; **************** &ensp;&ensp;&ensp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href="update-pwd.php?id=<?php echo $acc['id'] ?>">Chỉnh sửa</a></p>
                     <p><span>Chức vụ : </span>&ensp; <?php echo $acc['name'] ?></p>
                     <a href="./account-edit.php?id=<?php echo $acc[0] ?>">Chỉnh sửa thôn tin cá nhân >></a>
                 </div>

@@ -1,11 +1,14 @@
-<?php
+<?php 
 session_start();
+include('./db/conn.php');
+include('./cart/add-cart.php');
+include('./show/show-account.php');
+include('./edit/edit-pwd.php');
 if(!isset($_SESSION['username'])){
     header('location: formlogin.php');
 }
 include('./show/show-account.php');
-include('./cart/add-cart.php');
-?>
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,39 +32,44 @@ include('./cart/add-cart.php');
 </head>
 
 <body>
-    <?php
+<?php
     include('./abc/header.php')
-    ?>
+?>
 
     <!-- ##### Blog Wrapper Area Start ##### -->
-    <form action="./edit/edit-acc-detail.php?id=<?php echo $acc[0] ?>" method="post" enctype="multipart/form-data">
-        <div class="single-blog-wrapper">
+    <div class="single-blog-wrapper">
 
-            <!-- Single Blog Post Thumb -->
-            <div class="single-blog-post-thumb">
-                <img src="img/bg-img/bg-8.jpg" alt="">
+        <!-- Single Blog Post Thumb -->
+        <div class="single-blog-post-thumb">
+            <img src="img/bg-img/bg-8.jpg" alt="">
+        </div>
 
-            </div>
-
-            <div class="container">
-                <div class="ctn">
-                    <div class="grid-ctn">
-                        <div class="box">
-                            <img src="" alt="">
-                        </div>
-                        <input type="file" name="avatar">
+        <div class="container">
+            <div class="ctn">
+                <div class="grid-ctn">
+                    <div class="box">
+                        <img src="<?php echo $acc['avatar'] ?>" alt="">
                     </div>
-                    <div class="grid-ctnn">
-                        <p><span>Họ tên : </span>&ensp; <input type="text" name="name" value="<?php echo $acc[4] ?>" placeholder="<?php echo $acc[4] ?>"></p>
-                        <p><span>Email : </span>&ensp; <input type="text" name="email" value="<?php echo $acc['email'] ?>" placeholder="<?php echo $acc['email'] ?>"></p>
-                        <p><span>Mật khẩu : </span>&ensp; ****************</p>
-                        <p><span>Chức vụ : </span>&ensp; <?php echo $acc['name'] ?></p>
-                        <center><button type="submit">Cập nhật</button></center>
-                    </div>
+                </div>
+                <div class="grid-ctnn">
+                    <form action="" method="post">
+                    <?php echo $errPass ?>
+                    <div>
+                      Nhập mật khẩu cũ:  <input type="password" name="pass">
+                    </div><br>
+                    <div>
+                      Nhập mật khẩu mới:  <input type="password" name="pass_new">
+                    </div><br>
+                    <div>
+                    <div>
+                      Nhập lại mật khẩu mới:  <input type="password" name="cf_pass">
+                    </div><br>
+                    <button type="submit" >Đổi mật khẩu</button>
+                </form>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
     <!-- ##### Blog Wrapper Area End ##### -->
 
     <!-- ##### Footer Area Start ##### -->
@@ -85,7 +93,7 @@ include('./cart/add-cart.php');
 
 </html>
 <style>
-    .ctn {
+    .ctn{
         display: grid;
         grid-template-columns: 270px 1fr;
         max-width: 980px;
@@ -93,30 +101,21 @@ include('./cart/add-cart.php');
         padding-top: 40px;
         padding-bottom: 40px;
     }
-
-    .box {
-
+    .box{
+        
         width: 230px;
         height: 230px;
         float: left;
         border: 1px solid #999999;
     }
-
-    .grid-ctnn {
+    .grid-ctnn{
         padding-top: 20px;
     }
-
-    span {
+    span{
         font-weight: 500;
         color: #000;
     }
-
-    a {
+    a{
         color: blue;
-    }
-
-    input {
-        border: 0;
-        width: 60%;
     }
 </style>

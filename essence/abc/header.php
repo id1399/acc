@@ -13,7 +13,7 @@ $show_logo = executeQuery($sel_logo, true);
         <nav class="classy-navbar" id="essenceNav">
             <!-- Logo -->
             <?php foreach ($show_logo as $logo) : ?>
-                <a class="nav-brand" href="index.php"><img src="img/core-img/<?php echo $logo['logo'] ?>" alt=""></a>
+                <a class="nav-brand" style="width:14%" href="index.php"><img style="width:100%" src="img/core-img/<?php echo $logo['logo'] ?>" alt=""></a>
             <?php endforeach ?>
             <!-- Navbar Toggler -->
             <div class="classy-navbar-toggler">
@@ -33,9 +33,8 @@ $show_logo = executeQuery($sel_logo, true);
 
                         <li><a href="#">Category</a>
                             <ul class="dropdown">
-                                <?php foreach ($menus as $menu) : ?>
+                                <?php foreach ($menus as $menu): ?>
                                     <li><a href="shop.php?id=<?php echo $menu['id'] ?>"><?php echo $menu['name'] ?></a></li>
-
                                 <?php endforeach ?>
                             </ul>
                         </li>
@@ -69,7 +68,7 @@ $show_logo = executeQuery($sel_logo, true);
 
             </div>
             <?php
-            if (!isset($_SESSION['username']) || $_SESSION['id_role'] != 1) {
+            if (!isset($_SESSION['username']) || $_SESSION['id_role'] != 1 && $_SESSION['id_role'] != 3 ) {
                 echo '';
             } else {
                 echo '<div class="favourite-area"><a href="./NiceAdmin/index.php">Admin</a></div>';
@@ -145,7 +144,7 @@ $show_logo = executeQuery($sel_logo, true);
                 <li><span>total:</span> <span>$232.00</span></li>
             </ul>
             <div class="checkout-btn mt-100">
-                <a href="checkout.php" class="btn essence-btn">check out</a>
+                <a href="./checkout.php" class="btn essence-btn">check out</a>
             </div>
         </div>
     </div>

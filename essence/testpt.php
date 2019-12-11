@@ -7,7 +7,7 @@
  
         // BƯỚC 3: TÌM LIMIT VÀ GET ID TỪNG TRANG
         $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-        $limit = 3  ;
+        $limit = 9  ;
  
         // BƯỚC 4: TÍNH TOÁN SỐ LƯỢNG TRANG VÀ BẮT ĐẦU TỪ ĐÂU
         // tổng số trang
@@ -32,8 +32,12 @@
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $sel_limit = "SELECT * FROM products WHERE id_category = $id ";
+            $view_update = " UPDATE products SET view = view + 1 WHERE id_category = $id ";
+            mysqli_query($conn, $view_update);
         }
         $result_litmit = mysqli_query($conn,$sel_limit);
+
+        
         ?>
 
         

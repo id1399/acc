@@ -23,6 +23,7 @@
             }
 
             $_SESSION['username'] = $username;
+            $_SESSION['password'] = $password;
             $_SESSION['id'] = $id;
             $_SESSION['id_role'] = $role;
             header('location: ./index.php');

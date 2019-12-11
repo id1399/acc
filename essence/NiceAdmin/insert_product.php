@@ -84,8 +84,9 @@ include('./insert/insert-product.php');
               </header>
               <div class="panel-body">
                 <div class="form">
+               
                   <form class="form-validate form-horizontal" id="feedback_form" method="post" action="">
-
+                  <div style="color:red; font-weight: 600;"><?php echo $messeger ?></div>
                     <div class="form-group ">
                       <label for="cname" class="control-label col-lg-2">Loai <span class="required">*</span></label>
                       <div class="col-lg-10">
@@ -124,14 +125,14 @@ include('./insert/insert-product.php');
                     <div class="form-group ">
                       <label for="cemail" class="control-label col-lg-2">Anh <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="cemail" type="file" name="img" required />
+                        <input class="form-control " id="cemail" type="file" name="img"  />
                       </div>
                     </div>
 
                     <div class="form-group ">
                       <label for="cemail" class="control-label col-lg-2">Mo ta <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="cemail" type="text" name="description" required />
+                        <input class="form-control " id="cemail" type="text" name="description" />
                       </div>
                     </div>
 

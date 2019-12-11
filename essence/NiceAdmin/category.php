@@ -88,13 +88,13 @@ include('./quanlyhethong/danhmuc.php');
                   while ($row = mysqli_fetch_row($queryCategory)) {
                     $id = $row[0];
                     echo '
-                                            <tr>
-                                              <td>' . $row[0] . '</td>
-                                              <td>' . $row[1] . '</td>
-                                              <td><button onclick="clickEdit(' . $id . ')">Sửa</button></td>
-                                              <td><button onclick="clickDelete(' . $id . ')">Xóa</button></td>
-                                            </tr>
-                                            ';
+                    <tr>
+                      <td>' . $row[0] . '</td>
+                      <td>' . $row[1] . '</td>
+                      <td><button onclick="clickEdit(' . $id . ')">Sửa</button></td>
+                      <td><button onclick="clickDelete(' . $id . ')">Xóa</button></td>
+                    </tr>
+                    ';
                   }
                   ?>
                 </tbody>

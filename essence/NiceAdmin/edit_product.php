@@ -83,6 +83,7 @@ include('./quanlyhethong/danhmuc.php');
               </header>
               <div class="panel-body">
                 <div class="form">
+                  
                   <?php
                   if($queryPr != null){
                   while ($row = mysqli_fetch_row($queryPr)) {
@@ -136,8 +137,8 @@ include('./quanlyhethong/danhmuc.php');
                     <div class="form-group ">
                       <label for="cemail" class="control-label col-lg-2">Ảnh <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="cemail" type="file" name="img_new" required />
-                        <input class="form-control " id="cemail" type="hidden" name="img" value="'.$row[3].'">
+                        <input class="form-control " id="cemail" type="file" name="img_new" />
+                        <input class="form-control " id="cemail" type="hidden" name="img" value="'.$row[4].'">
                       </div>
                     </div>
 

@@ -40,20 +40,6 @@
               <li><a class="" href="form_contact.php">Contact</a></li>
             </ul>
           </li>
-          <li>
-            <a class="" href="widgets.php">
-              <i class="icon_genius"></i>
-              <span>Widgets</span>
-            </a>
-          </li>
-          <li>
-            <a class="" href="chart-chartjs.php">
-              <i class="icon_piechart"></i>
-              <span>Charts</span>
-
-            </a>
-
-          </li>
 
           <li class="sub-menu">
             <a href="javascript:;" class="">

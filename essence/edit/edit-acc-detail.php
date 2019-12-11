@@ -1,7 +1,7 @@
 <?php 
 session_start();
 if($_SERVER["REQUEST_METHOD"] != "POST"){
-	header('location: index.php');
+	header('location: ../index.php');
 	die;
 }
 $id = $_SESSION['id'];

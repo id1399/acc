@@ -1,8 +1,10 @@
 <?php
 session_start();
+include('./cart/add-cart.php');
 require_once './db/connect.php';
 include('./db/conn.php');
 include('./comment/getComment.php');
+include('./edit/edit-view.php');
 //select
 $selectPr = "select * from products ";
 if (isset($_GET['id'])) {
@@ -59,13 +61,13 @@ $queryPr = executeQuery($selectPr, true);
 
 
             <span><?php echo $pr['source'] ?></span>
-            <a href="cart.php">
+            <a href="#">
                 <h2><?php echo $pr['name'] ?></h2>
             </a>
             <p class="product-price"><span class="old-price">$<?php echo $pr['price'] ?></span> $<?php echo $pr['sale_price'] ?></p>
             <p class="product-desc"><?php echo $pr['description'] ?></p>
-
-        <?php endforeach ?>
+            <p class="product-desc">View : <?php echo $pr['view'] ?></p>
+        
         <!-- Form -->
         <form class="cart-form clearfix" method="post">
             <!-- Select Box -->
@@ -74,7 +76,15 @@ $queryPr = executeQuery($selectPr, true);
             <!-- Cart & Favourite Box -->
             <div class="cart-fav-box d-flex align-items-center">
                 <!-- Cart -->
-                <button type="submit" name="addtocart" value="5" class="btn essence-btn">Add to cart</button>
+                <form action="" method="post">
+                    <button type="submit" class="btn essence-btn" name="addToCart">Add to Cart</button>
+                    <input type="hidden" name="product_id" value ="<?php echo $pr['id'] ?>">
+                    <input type="hidden" name="source" value ="<?php echo $pr['source'] ?>">
+                    <input type="hidden" name="name" value ="<?php echo $pr['name'] ?>">
+                    <input type="hidden" name="sale_price" value ="<?php echo $pr['sale_price'] ?>">
+                    <input type="hidden" name="image" value ="<?php echo $pr['image'] ?>">
+                </form>
+                <?php endforeach ?>
                 <!-- Favourite -->
                 <div class="product-favourite ml-4">
                     <a href="#" class="favme fa fa-heart"></a>

@@ -6,6 +6,6 @@
 
         $d_product = " DELETE FROM products WHERE id = $id ";
         mysqli_query($conn, $d_product);
-        header('location: ../profile.php');
+        header('location: ../product.php');
     }
 ?>
