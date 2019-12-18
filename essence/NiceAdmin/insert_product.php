@@ -111,14 +111,14 @@ include('./insert/insert-product.php');
                     <div class="form-group ">
                       <label for="cemail" class="control-label col-lg-2">Ten san pham <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="cemail" type="text" name="name" required />
+                        <input class="form-control " id="cemail" type="text" name="name"  />
                       </div>
                     </div>
 
                     <div class="form-group ">
                       <label for="cemail" class="control-label col-lg-2">Gia <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="cemail" type="text" name="price" required />
+                        <input class="form-control " id="cemail" type="text" name="price"  />
                       </div>
                     </div>
 
@@ -139,7 +139,7 @@ include('./insert/insert-product.php');
                     <div class="form-group ">
                       <label for="cemail" class="control-label col-lg-2">Nguon goc <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="cemail" type="text" name="source" required />
+                        <input class="form-control " id="cemail" type="text" name="source" />
                       </div>
                     </div>
 

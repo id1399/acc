@@ -29,11 +29,11 @@ $show_logo = executeQuery($sel_logo, true);
                 <div class="classynav">
                     <ul>
                         <li><a href="shop.php">Shop</a></li>
-                        <li><a href="#">Pages</a></li>
+                        <li><a href="facebook.com">Pages</a></li>
 
-                        <li><a href="#">Category</a>
+                        <li><a href="shop.php">Category</a>
                             <ul class="dropdown">
-                                <?php foreach ($menus as $menu): ?>
+                                <?php foreach ($menus as $menu) : ?>
                                     <li><a href="shop.php?id=<?php echo $menu['id'] ?>"><?php echo $menu['name'] ?></a></li>
                                 <?php endforeach ?>
                             </ul>
@@ -51,9 +51,9 @@ $show_logo = executeQuery($sel_logo, true);
         <div class="header-meta d-flex clearfix justify-content-end">
             <!-- Search Area -->
             <div class="search-area">
-                <form action="#" method="post">
+                <form action="search.php" method="get">
                     <input type="search" name="search" id="headerSearch" placeholder="Type for search">
-                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    <button type="submit" name="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </form>
             </div>
             <!-- Favourite Area -->
@@ -68,7 +68,7 @@ $show_logo = executeQuery($sel_logo, true);
 
             </div>
             <?php
-            if (!isset($_SESSION['username']) || $_SESSION['id_role'] != 1 && $_SESSION['id_role'] != 3 ) {
+            if (!isset($_SESSION['username']) || $_SESSION['id_role'] != 1 && $_SESSION['id_role'] != 3) {
                 echo '';
             } else {
                 echo '<div class="favourite-area"><a href="./NiceAdmin/index.php">Admin</a></div>';
@@ -87,8 +87,8 @@ $show_logo = executeQuery($sel_logo, true);
             </div>
             <!-- Cart Area -->
             <div class="cart-area">
-               <a href="#" id="essenceCartBtn"><img src="img/core-img/bag.svg" alt=""> <span> <?php echo count($cart) ?></span></a>
-            
+                <a href="#" id="essenceCartBtn"><img src="img/core-img/bag.svg" alt=""> <span> <?php echo count($cart) ?></span></a>
+
             </div>
         </div>
 
@@ -106,45 +106,44 @@ $show_logo = executeQuery($sel_logo, true);
     </div>
 
     <div class="cart-content d-flex">
-
         <!-- Cart List Area -->
-        <div class="cart-list">
-            <!-- Single Cart Item -->
-            <!-- Single Cart Item -->
-            <?php foreach ($cart as $key => $item) {
-                echo '
 
+        <div class="cart-list">
+            <?php
+            $total = 0;
+             foreach ($cart as $key => $item) {
+                 $totalQty = ($item->sale)*($item->qty);
+                 $total = $total + $totalQty;
+                echo '
             <div class="single-cart-item">
-                <a href="./abc/remove-cart.php?id='.$item->id.'" class="product-image">
-                    <img src="img/product-img2/'.$item->img.'" class="cart-thumb" alt="">
+                <div class="product-image">
+                    <img src="img/product-img2/' . $item->img . '" class="cart-thumb" alt="">
                     <!-- Cart Item Desc -->
                     <div class="cart-item-desc">
-                        <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                        <span class="badge">'.$item->soce.'</span>
-                        <h6>'.$item->name.'</h6>
-                        <p class="size"></p>
-                        <p class="color"></p>
-                        <p class="price">$'.$item->sale.'</p>
+                        <a href="./abc/remove-cart.php?id=' . $item->id . '" ><span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span></a>
+                        <span class="badge">' . $item->soce . '</span>
+                        <h6 style="margin:0">' . $item->name . '</h6>
+                        <div><span style="color:#fff;" >Qty:</span> <input style="width:70px;" type="number" name="qty" value="'.$item->qty.'" readonly></div>
+                        <p style="margin:0" class="price">$' . $totalQty . '</p>
                     </div>
-                </a>
-            </div><br>';
+                </div>
+            </div>
+            <!-- Single Cart Item -->
+            ';
             }
             ?>
-            <!-- Single Cart Item -->
         </div>
-
         <!-- Cart Summary -->
         <div class="cart-amount-summary">
-
             <h2>Summary</h2>
             <ul class="summary-table">
-                <li><span>subtotal:</span> <span>$274.00</span></li>
+                <li><span>subtotal:</span> <span>$<?php echo $total ?></span></li>
                 <li><span>delivery:</span> <span>Free</span></li>
-                <li><span>discount:</span> <span>-15%</span></li>
-                <li><span>total:</span> <span>$232.00</span></li>
+                <li><span>discount:</span> <span>-0%</span></li>
+                <li><span>total:</span> <span>$<?php echo $total ?></span></li>      
             </ul>
             <div class="checkout-btn mt-100">
-                <a href="./checkout.php" class="btn essence-btn">check out</a>
+                <a href="checkout.php" class="btn essence-btn" >Check out</a>
             </div>
         </div>
     </div>

@@ -219,6 +219,7 @@ include('./cart/add-cart.php');
                                                     <input type="hidden" name="name" value ="'.$row[1].'">
                                                     <input type="hidden" name="sale_price" value ="'.$row[3].'">
                                                     <input type="hidden" name="image" value ="'.$row[4].'">
+                                                    <div>Qty:<input type="number" name="qty" value="1" ></div>
                                                 </form>
                                                 </div>
                                             </div>

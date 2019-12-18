@@ -4,12 +4,10 @@
     if(isset($_SESSION['cart'])){// Lấy dữ liệu giỏ hàng đang có
         $cart = $_SESSION['cart'];
     }
-
     $id = $_GET['id'];
     $vitri = findArrayByID($id,$cart);
     if ($vitri != -1) {
         unset($cart[$vitri]);
-
         $_SESSION['cart'] = $cart;
         header('location: ../shop.php');
     }
@@ -24,6 +22,6 @@
             }
             $index = $index + 1; // tăng thêm khi add
         }
-        return $result; // Quay lại từ chưa có gì khi reset lại trang
+        return $result; // Quay lại từ chưa có gì 
     } 
 ?>

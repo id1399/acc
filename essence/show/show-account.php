@@ -1,5 +1,10 @@
 <?php
-    $id = $_SESSION['id'] ;
+    if (!isset($_SESSION['username'])) {
+        $id = null;
+    }else{
+        $id = $_SESSION['id'] ;
+    }
+   
     $sel_accnt = "select * 
                   from accounts as acc
                   join role as r on r.id = acc.id_role

@@ -172,7 +172,7 @@
   function chitiet(id){
   var submit
     if(submit = true){
-      window.location.href = './chitietcmt.php?id='+id;
+      window.location.href = './detail-cmt.php?id='+id;
     }
   }
 </script>

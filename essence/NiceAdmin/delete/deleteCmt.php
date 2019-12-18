@@ -5,6 +5,6 @@
     $id = $_GET['id'];
     $del_cmt = "DELETE FROM comments WHERE id = $id";
     mysqli_query($conn,$del_cmt);
-    header('location: ../chitietcmt.php?id=1');
+    header('location: ../detail-cmt.php?id='.$id.'');
     }
 ?>

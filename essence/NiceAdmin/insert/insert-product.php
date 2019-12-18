@@ -16,9 +16,9 @@
           $messeger = " Đã có loại hàng này ";
         }else if($name == ""){
           $messeger = " Hãy nhập tên ";
-        }else if($price==""){
+        }else if($price == ""){
           $messeger = " Hãy nhập giá ";
-        }else if($source==""){
+        }else if($source == ""){
           $messeger = " Hãy nhập nguồn gốc ";
         }else{
           $insProduct = "INSERT INTO products(name,sale_price,image,description,source,id_category)

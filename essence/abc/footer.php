@@ -6,29 +6,31 @@ $show_logo = executeQuery($sel_logo, true);
 ?>
 <!-- ##### Brands Area Start ##### -->
 <div class="brands-area d-flex align-items-center justify-content-between">
-    <!-- Brand Logo -->
     <div class="single-brands-logo">
-        <img src="img/core-img/brand1.png" alt="">
+        <img src="" alt="">
     </div>
     <!-- Brand Logo -->
     <div class="single-brands-logo">
-        <img src="img/core-img/brand2.png" alt="">
+        <img style="margin-left:20px" src="img/product-img2/bnr-logo.png" alt="">
+        <p style="color: #000; font-weight:600; padding-top:20px">Sản phẩm an toàn</p>
     </div>
     <!-- Brand Logo -->
     <div class="single-brands-logo">
-        <img src="img/core-img/brand3.png" alt="">
+        <img style="margin-left:20px" src="img/product-img2/bnr-logo2.png" alt="">
+        <p style="color: #000; font-weight:600; padding-top:20px">Chất lượng cam kết</p>
     </div>
     <!-- Brand Logo -->
     <div class="single-brands-logo">
-        <img src="img/core-img/brand4.png" alt="">
+        <img style="margin-left:20px" src="img/product-img2/bnr-logo3.png" alt="">
+        <p style="color: #000; font-weight:600; padding-top:20px">Dịch vụ vượt trội</p>
     </div>
     <!-- Brand Logo -->
     <div class="single-brands-logo">
-        <img src="img/core-img/brand5.png" alt="">
+        <img style="margin-left:20px" src="img/product-img2/bnr-logo4.png" alt="">
+        <p style="color: #000; font-weight:600; padding-top:20px">Giao hàng nhanh chóng</p>
     </div>
-    <!-- Brand Logo -->
     <div class="single-brands-logo">
-        <img src="img/core-img/brand6.png" alt="">
+        <img src="" alt="">
     </div>
 </div>
 <!-- ##### Brands Area End ##### -->

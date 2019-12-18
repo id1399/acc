@@ -3,8 +3,14 @@ session_start();
 include('./db/conn.php');
 include('./show/showbanner.php');
 include('./cart/add-cart.php');
-$selTopPr = "SELECT * FROM products ORDER BY view DESC LIMIT 4 ";
+$selTopPr = "SELECT * FROM products ORDER BY view DESC LIMIT 10 ";
 $queryTopPr = mysqli_query($conn, $selTopPr);
+
+$selPie = "SELECT * FROM products where id_category = 17";
+$queryPie = mysqli_query($conn, $selPie);
+
+$selBeer = "SELECT * FROM products ORDER BY RAND() LIMIT 6";
+$queryBeer = mysqli_query($conn, $selBeer);
 
 ?>
 <!DOCTYPE html>
@@ -44,7 +50,7 @@ $queryTopPr = mysqli_query($conn, $selTopPr);
         $_SESSION['name'] = $name;
         $hello = "";
         if (isset($_SESSION['username'])) {
-            $hello = $hello . 'Xin chào';
+            $hello = $hello . 'Hello';
         } else {
             $hello = $hello . '';
         }
@@ -57,7 +63,7 @@ $queryTopPr = mysqli_query($conn, $selTopPr);
                     width: 51%;
                     border-radius: 37px;
                     padding: 35px 35px;">
-                        <h4 style ="color: #fff">' . $hello . '-' . $_SESSION['username'] . '</h4>
+                        <h4 style ="color: #fff">' . $hello . '      ' . $_SESSION['username'] . '</h4>
                         <h6 style ="color: #b1aeae">' . $row[3] . '</h6>
                         <h2 style ="color: #fff">' . $row[4] . '</h2>
                         <a href="#" class="btn essence-btn">view collection</a>
@@ -113,8 +119,8 @@ $queryTopPr = mysqli_query($conn, $selTopPr);
                         <div class="h-100 d-flex align-items-center justify-content-end">
                             <div class="cta--text" style="padding-top: 270px; padding-right: 10px">
                                 <h6 style="font-weight:600">-30%</h6>
-                                <h2>All Tet Gift Basket</h2>
-                                <a href="shop.php?id=14" class="btn essence-btn">Watch now</a>
+                                <h2>All Products</h2>
+                                <a href="shop.php" class="btn essence-btn">Watch now</a>
                             </div>
                         </div>
                     </div>
@@ -129,7 +135,7 @@ $queryTopPr = mysqli_query($conn, $selTopPr);
             <div class="row">
                 <div class="col-12">
                     <div class="section-heading text-center">
-                        <h2>HOT Products</h2>
+                    <a href="shop.php?id=17"><h2>Pie - Candy</h2></a>
                     </div>
                 </div>
             </div>
@@ -139,10 +145,14 @@ $queryTopPr = mysqli_query($conn, $selTopPr);
             <div class="row">
                 <div class="col-12">
                     <div class="popular-products-slides owl-carousel">
+                    <?php 
+                    while($row = mysqli_fetch_row($queryPie)){
+                        $id = $row[0];
+                        echo '
                         <div class="single-product-wrapper">
                         <!-- Product Image -->
                         <div class="product-img" style = "height: 200px;">
-                            <img src="img/product-img2/chivas.jpg" alt="">
+                            <img src="img/product-img2/' . $row[4] . '" alt="">
                             <!-- Hover Thumb -->
                             <!-- <img class="hover-img" src="img/product-img2/snack.jpg" alt=""> -->
                             <!-- Favourite -->
@@ -152,11 +162,11 @@ $queryTopPr = mysqli_query($conn, $selTopPr);
                         </div>
                         <!-- Product Description -->
                         <div class="product-description">
-                            <span>Nguồn'</span>
+                            <span>' . $row[6] . '</span>
                             <a href="single-product-details.php">
-                                <h6>Sản phẩm A</h6>
+                                <h6>' . $row[1] . '</h6>
                             </a>
-                            <p class="product-price">$123123</p>
+                            <p class="product-price">$' . $row[3] . '</p>
    
                             <!-- Hover Content -->
                             <div class="hover-content">
@@ -174,128 +184,90 @@ $queryTopPr = mysqli_query($conn, $selTopPr);
                             </div>
                         </div>
                     </div>
+                        ';
+                    } 
+                    
+                    ?>
+                        
 
-                    <div class="single-product-wrapper">
-                        <!-- Product Image -->
-                        <div class="product-img" style = "height: 200px;">
-                            <img src="img/product-img2/chivas.jpg" alt="">
-                            <!-- Hover Thumb -->
-                            <!-- <img class="hover-img" src="img/product-img2/snack.jpg" alt=""> -->
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>Nguồn'</span>
-                            <a href="single-product-details.php">
-                                <h6>Sản phẩm B</h6>
-                            </a>
-                            <p class="product-price">$123123</p>
-   
-                            <!-- Hover Content -->
-                            <div class="hover-content">
-                                <!-- Add to Cart -->
-                                <div class="add-to-cart-btn">
-                                    <form action="" method="post">
-                                        <button type="submit" class="btn essence-btn" name="addToCart">Add to Cart</button>
-                                        <input type="hidden" name="product_id" value ="' . $id . '">
-                                        <input type="hidden" name="source" value ="' . $row[6] . '">
-                                        <input type="hidden" name="name" value ="' . $row[1] . '">
-                                        <input type="hidden" name="sale_price" value ="' . $row[3] . '">
-                                        <input type="hidden" name="image" value ="' . $row[4] . '">
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="single-product-wrapper">
-                        <!-- Product Image -->
-                        <div class="product-img" style = "height: 200px;">
-                            <img src="img/product-img2/chivas.jpg" alt="">
-                            <!-- Hover Thumb -->
-                            <!-- <img class="hover-img" src="img/product-img2/snack.jpg" alt=""> -->
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>Nguồn'</span>
-                            <a href="single-product-details.php">
-                                <h6>Sản phẩm C</h6>
-                            </a>
-                            <p class="product-price">$123123</p>
-   
-                            <!-- Hover Content -->
-                            <div class="hover-content">
-                                <!-- Add to Cart -->
-                                <div class="add-to-cart-btn">
-                                    <form action="" method="post">
-                                        <button type="submit" class="btn essence-btn" name="addToCart">Add to Cart</button>
-                                        <input type="hidden" name="product_id" value ="' . $id . '">
-                                        <input type="hidden" name="source" value ="' . $row[6] . '">
-                                        <input type="hidden" name="name" value ="' . $row[1] . '">
-                                        <input type="hidden" name="sale_price" value ="' . $row[3] . '">
-                                        <input type="hidden" name="image" value ="' . $row[4] . '">
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="single-product-wrapper">
-                        <!-- Product Image -->
-                        <div class="product-img" style = "height: 200px;">
-                            <img src="img/product-img2/chivas.jpg" alt="">
-                            <!-- Hover Thumb -->
-                            <!-- <img class="hover-img" src="img/product-img2/snack.jpg" alt=""> -->
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>Nguồn'</span>
-                            <a href="single-product-details.php">
-                                <h6>Sản phẩm D</h6>
-                            </a>
-                            <p class="product-price">$123123</p>
-   
-                            <!-- Hover Content -->
-                            <div class="hover-content">
-                                <!-- Add to Cart -->
-                                <div class="add-to-cart-btn">
-                                    <form action="" method="post">
-                                        <button type="submit" class="btn essence-btn" name="addToCart">Add to Cart</button>
-                                        <input type="hidden" name="product_id" value ="' . $id . '">
-                                        <input type="hidden" name="source" value ="' . $row[6] . '">
-                                        <input type="hidden" name="name" value ="' . $row[1] . '">
-                                        <input type="hidden" name="sale_price" value ="' . $row[3] . '">
-                                        <input type="hidden" name="image" value ="' . $row[4] . '">
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- ##### New Arrivals Area End ##### -->
+    <section class="new_arrivals_area section-padding-80 clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-center">
+                        <a href="shop.php"><h2>Product Random</h2></a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="popular-products-slides owl-carousel">
+                    <?php 
+                    while($row = mysqli_fetch_row($queryBeer)){
+                        $id = $row[0];
+                        echo '
+                        <div class="single-product-wrapper">
+                        <!-- Product Image -->
+                        <div class="product-img" style = "height: 200px;">
+                            <img src="img/product-img2/' . $row[4] . '" alt="">
+                            <!-- Hover Thumb -->
+                            <!-- <img class="hover-img" src="img/product-img2/snack.jpg" alt=""> -->
+                            <!-- Favourite -->
+                            <div class="product-favourite">
+                                <a href="#" class="favme fa fa-heart"></a>
+                            </div>
+                        </div>
+                        <!-- Product Description -->
+                        <div class="product-description">
+                            <span>' . $row[6] . '</span>
+                            <a href="single-product-details.php">
+                                <h6>' . $row[1] . '</h6>
+                            </a>
+                            <p class="product-price">$' . $row[3] . '</p>
+   
+                            <!-- Hover Content -->
+                            <div class="hover-content">
+                                <!-- Add to Cart -->
+                                <div class="add-to-cart-btn">
+                                    <form action="" method="post">
+                                        <button type="submit" class="btn essence-btn" name="addToCart">Add to Cart</button>
+                                        <input type="hidden" name="product_id" value ="' . $id . '">
+                                        <input type="hidden" name="source" value ="' . $row[6] . '">
+                                        <input type="hidden" name="name" value ="' . $row[1] . '">
+                                        <input type="hidden" name="sale_price" value ="' . $row[3] . '">
+                                        <input type="hidden" name="image" value ="' . $row[4] . '">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        ';
+                    } 
+                    
+                    ?>
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- ##### New Arrivals Area Start ##### -->
     <section class="new_arrivals_area section-padding-80 clearfix">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="section-heading text-center">
-                        <h2>TOP 4 Popular Products</h2>
+                        <h2>TOP 10 Popular Products</h2>
                     </div>
                 </div>
             </div>
@@ -342,6 +314,7 @@ $queryTopPr = mysqli_query($conn, $selTopPr);
                                         <input type="hidden" name="name" value ="' . $row[1] . '">
                                         <input type="hidden" name="sale_price" value ="' . $row[3] . '">
                                         <input type="hidden" name="image" value ="' . $row[4] . '">
+                                        <div style="color:red;">Qty:<input type="number" name="qty" value="1" ></div>
                                     </form>
                                 </div>
                             </div>
