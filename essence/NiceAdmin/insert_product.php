@@ -88,7 +88,7 @@ include('./insert/insert-product.php');
                   <form class="form-validate form-horizontal" id="feedback_form" method="post" action="">
                   <div style="color:red; font-weight: 600;"><?php echo $messeger ?></div>
                     <div class="form-group ">
-                      <label for="cname" class="control-label col-lg-2">Loai <span class="required">*</span></label>
+                      <label for="cname" class="control-label col-lg-2">Loại <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <select style="width : 100%;
                                       padding: 6px 0px;
@@ -109,35 +109,35 @@ include('./insert/insert-product.php');
                     </div>
 
                     <div class="form-group ">
-                      <label for="cemail" class="control-label col-lg-2">Ten san pham <span class="required">*</span></label>
+                      <label for="cemail" class="control-label col-lg-2">Tên sản phẩm <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <input class="form-control " id="cemail" type="text" name="name"  />
                       </div>
                     </div>
 
                     <div class="form-group ">
-                      <label for="cemail" class="control-label col-lg-2">Gia <span class="required">*</span></label>
+                      <label for="cemail" class="control-label col-lg-2">Giá <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <input class="form-control " id="cemail" type="text" name="price"  />
                       </div>
                     </div>
 
                     <div class="form-group ">
-                      <label for="cemail" class="control-label col-lg-2">Anh <span class="required">*</span></label>
+                      <label for="cemail" class="control-label col-lg-2">Ảnh<span class="required">*</span></label>
                       <div class="col-lg-10">
                         <input class="form-control " id="cemail" type="file" name="img"  />
                       </div>
                     </div>
 
                     <div class="form-group ">
-                      <label for="cemail" class="control-label col-lg-2">Mo ta <span class="required">*</span></label>
+                      <label for="cemail" class="control-label col-lg-2">Mô tả <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <input class="form-control " id="cemail" type="text" name="description" />
                       </div>
                     </div>
 
                     <div class="form-group ">
-                      <label for="cemail" class="control-label col-lg-2">Nguon goc <span class="required">*</span></label>
+                      <label for="cemail" class="control-label col-lg-2">Nguồn gốc <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <input class="form-control " id="cemail" type="text" name="source" />
                       </div>
@@ -146,7 +146,7 @@ include('./insert/insert-product.php');
                     <div class="form-group">
                       <div class="col-lg-offset-2 col-lg-10">
                         <button class="btn btn-primary" type="submit" name="submit-product">ADD</button>
-                        <button class="btn btn-default" type="button">Cancel</button>
+                        <a href="product.php" class="btn btn-default" >Cancel</a>
                       </div>
                     </div>
 

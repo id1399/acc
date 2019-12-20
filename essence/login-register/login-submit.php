@@ -9,6 +9,7 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
         $id = null;
+        $name = null;
 
         $select = "SELECT * FROM accounts WHERE username = '$username' && `password`='$password' ";
         $resul = mysqli_query($conn, $select);
@@ -19,13 +20,14 @@
             while($row = mysqli_fetch_row($resul)){
                 $id = $row[0];
                 $role = $row[5];
-                $name = $row[4];
             }
 
             $_SESSION['username'] = $username;
             $_SESSION['password'] = $password;
+            $_SESSION['name'] = $name;
             $_SESSION['id'] = $id;
             $_SESSION['id_role'] = $role;
+
             header('location: ./index.php');
         }else{
             $messager = "Sai tài khoản mật khẩu";

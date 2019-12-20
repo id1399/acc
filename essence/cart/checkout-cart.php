@@ -1,16 +1,14 @@
 <?php
-
+        session_start();
+        $errName = "";
+        $errEmail = "";
+        $errPhone = "";
+        $errNote = "";
         $id_user = $_POST['user_id'];
         $name_order  = $_POST['name_order'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $note = $_POST['note'];
-
-        $id_product = $_POST['product_id'];
-        $name_detail = $_POST['name'];
-        $cost = $_POST['cost'];
-        $qty = $_POST['qty'];
-        $total = $_POST['total'];
 
         $host = "127.0.0.1";
         $dbname = "db2";
@@ -19,16 +17,28 @@
         $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", 
                             $dbUsername, 
                             $dbPass);
+        
+        $selOrder ="SELECT * FROM bill_order ORDER BY id DESC LIMIT 1";
+        $stmttt = $conn->prepare($selOrder);
+        $stmttt->execute();
+        $listId = $stmttt->fetchAll();
 
-        $addOrder = "INSERT INTO bill_order(id_user,name,email,phone,note,status)
-                        VALUES($id_user,'$name_order','$email','$phone','$note',2)";
-        $stmt = $conn->prepare($addOrder);
+        foreach ($listId as $key => $idList) {
+                 $id = $idList['id'];
+
+        $upOrder = "UPDATE bill_order SET id_user = $id_user,
+                                        name = '$name_order',
+                                        email = '$email',
+
+                                        phone = '$phone',
+                                        note = '$note',
+                                        status = 2 WHERE id = $id";
+        $stmt = $conn->prepare($upOrder);
         $stmt->execute();
 
-        $insQrPrCart = "INSERT INTO bill_detail(id_user,id_product,name,cost,quantity,total)
-                        VALUES($id_user,$id_product,'$name_detail',$cost,$qty,$total)";
-        $stmtt = $conn->prepare($insQrPrCart);
-        $stmtt->execute();
+        }
+        
         echo '<script type="text/javascript">alert("Thanh toán thành công"); </script>';
         // header('location: ../index.php');
 ?>
+<a href="../index.php">Back To Index</a>

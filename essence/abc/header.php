@@ -28,8 +28,7 @@ $show_logo = executeQuery($sel_logo, true);
                 <!-- Nav Start -->
                 <div class="classynav">
                     <ul>
-                        <li><a href="shop.php">Shop</a></li>
-                        <li><a href="facebook.com">Pages</a></li>
+                        <li><a href="https://www.facebook.com/">Pages</a></li>
 
                         <li><a href="shop.php">Category</a>
                             <ul class="dropdown">
@@ -38,9 +37,14 @@ $show_logo = executeQuery($sel_logo, true);
                                 <?php endforeach ?>
                             </ul>
                         </li>
-
-
                         <li><a href="contact.php">Contact</a></li>
+                        <?php 
+                            if(!isset($_SESSION['username'])){
+                                echo '';
+                            }else{
+                                echo '<li><a href="history.php">Transaction history</a></li>';
+                            }
+                        ?>
                     </ul>
                 </div>
                 <!-- Nav End -->
@@ -143,7 +147,27 @@ $show_logo = executeQuery($sel_logo, true);
                 <li><span>total:</span> <span>$<?php echo $total ?></span></li>      
             </ul>
             <div class="checkout-btn mt-100">
-                <a href="checkout.php" class="btn essence-btn" >Check out</a>
+                <?php 
+                    if(!isset($_SESSION['username'])){
+                        echo '
+                        <form action="./cart/add-order.php" method="post">
+                            <button class="btn essence-btn" type="submit" name="ins_order" >Check out</button>
+                            <input type="hidden" name="id_user" value="null">
+                            <input type="hidden" name="name" value="">
+                            <input type="hidden" name="email" value="">
+                        </form>
+                        ';
+                    }else{
+                        echo '
+                        <form action="./cart/add-order.php" method="post">
+                        <button class="btn essence-btn" type="submit" name="ins_order" >Check out</button>
+                            <input type="hidden" name="id_user" value="'.$_SESSION['id'].'">
+                            <input type="hidden" name="name" value="'.$acc[4].'">
+                            <input type="hidden" name="email" value="'.$acc['email'].'">
+                        </form>
+                        ';
+                    }
+                ?>
             </div>
         </div>
     </div>

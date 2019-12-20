@@ -5,6 +5,7 @@ require_once './db/connect.php';
 include('./db/conn.php');
 include('./comment/getComment.php');
 include('./edit/edit-view.php');
+include('./show/show-account.php');
 //select
 $selectPr = "select * from products ";
 if (isset($_GET['id'])) {
@@ -83,6 +84,7 @@ $queryPr = executeQuery($selectPr, true);
                     <input type="hidden" name="name" value ="<?php echo $pr['name'] ?>">
                     <input type="hidden" name="sale_price" value ="<?php echo $pr['sale_price'] ?>">
                     <input type="hidden" name="image" value ="<?php echo $pr['image'] ?>">
+                    <div style="color:red;">Qty:<input type="number" name="qty" value="1" ></div>
                 </form>
                 <?php endforeach ?>
                 <!-- Favourite -->
@@ -96,7 +98,7 @@ $queryPr = executeQuery($selectPr, true);
     </section>
     <!-- ##### Single Product Details Area End ##### -->
     <section>
-
+        <br><caption>Comment</caption><br>
         <table class="table">
             <thead>
                 <tr>

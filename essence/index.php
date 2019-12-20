@@ -1,8 +1,12 @@
 <?php
 session_start();
 include('./db/conn.php');
-include('./show/showbanner.php');
 include('./cart/add-cart.php');
+include('./show/show-order.php');
+include('./show/showbanner.php');
+include('./show/show-account.php');
+include('./db/conn.php');
+
 $selTopPr = "SELECT * FROM products ORDER BY view DESC LIMIT 10 ";
 $queryTopPr = mysqli_query($conn, $selTopPr);
 
@@ -12,6 +16,8 @@ $queryPie = mysqli_query($conn, $selPie);
 $selBeer = "SELECT * FROM products ORDER BY RAND() LIMIT 6";
 $queryBeer = mysqli_query($conn, $selBeer);
 
+$selPrice = "SELECT * FROM `products` WHERE price > 0";
+$queryPrice = mysqli_query($conn,$selPrice);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +53,6 @@ $queryBeer = mysqli_query($conn, $selBeer);
     <!-- ##### Welcome Area Start ##### -->
     <?php
     while ($row = mysqli_fetch_row($queryBanner)) {
-        $_SESSION['name'] = $name;
         $hello = "";
         if (isset($_SESSION['username'])) {
             $hello = $hello . 'Hello';
@@ -66,7 +71,6 @@ $queryBeer = mysqli_query($conn, $selBeer);
                         <h4 style ="color: #fff">' . $hello . '      ' . $_SESSION['username'] . '</h4>
                         <h6 style ="color: #b1aeae">' . $row[3] . '</h6>
                         <h2 style ="color: #fff">' . $row[4] . '</h2>
-                        <a href="#" class="btn essence-btn">view collection</a>
                     </div>
                 </div>
             </div>
@@ -119,8 +123,8 @@ $queryBeer = mysqli_query($conn, $selBeer);
                         <div class="h-100 d-flex align-items-center justify-content-end">
                             <div class="cta--text" style="padding-top: 270px; padding-right: 10px">
                                 <h6 style="font-weight:600">-30%</h6>
-                                <h2>All Products</h2>
-                                <a href="shop.php" class="btn essence-btn">Watch now</a>
+                                <h2>Sale TetGift</h2>
+                                <a href="shop.php?id=14" class="btn essence-btn">Watch now</a>
                             </div>
                         </div>
                     </div>
@@ -130,6 +134,72 @@ $queryBeer = mysqli_query($conn, $selBeer);
     </div>
     <!-- ##### CTA Area End ##### -->
     <!-- ##### New Arrivals Area Start ##### -->
+    <section class="new_arrivals_area section-padding-80 clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-center">
+                    <a href="shop.php?id=17"><h2>Sale Weekday</h2></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="popular-products-slides owl-carousel">
+                    <?php 
+                    while($row = mysqli_fetch_row($queryPrice)){
+                        $id = $row[0];
+                        echo '
+                        <div class="single-product-wrapper">
+                        <!-- Product Image -->
+                        <div class="product-img" style = "height: 200px;">
+                            <img src="img/product-img2/' . $row[4] . '" alt="">
+                            <!-- Hover Thumb -->
+                            <!-- <img class="hover-img" src="img/product-img2/snack.jpg" alt=""> -->
+                            <!-- Favourite -->
+                            <div class="product-favourite">
+                                <a href="#" class="favme fa fa-heart"></a>
+                            </div>
+                        </div>
+                        <!-- Product Description -->
+                        <div class="product-description">
+                            <span>' . $row[6] . '</span>
+                            <a href="single-product-details.php?id='.$id.'">
+                                <h6>' . $row[1] . '</h6>
+                            </a>
+                            <p class="product-price"><span class="old-price">$' . $row[2]. '</span>$' . $row[3] . '</p>
+   
+                            <!-- Hover Content -->
+                            <div class="hover-content">
+                                <!-- Add to Cart -->
+                                <div class="add-to-cart-btn">
+                                    <form action="" method="post">
+                                        <button type="submit" class="btn essence-btn" name="addToCart">Add to Cart</button>
+                                        <input type="hidden" name="product_id" value ="' . $id . '">
+                                        <input type="hidden" name="source" value ="' . $row[6] . '">
+                                        <input type="hidden" name="name" value ="' . $row[1] . '">
+                                        <input type="hidden" name="sale_price" value ="' . $row[3] . '">
+                                        <input type="hidden" name="image" value ="' . $row[4] . '">
+                                        <div style="color:red;">Qty:<input type="number" name="qty" value="1" ></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        ';
+                    } 
+                    
+                    ?>
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="new_arrivals_area section-padding-80 clearfix">
         <div class="container">
             <div class="row">
@@ -163,8 +233,8 @@ $queryBeer = mysqli_query($conn, $selBeer);
                         <!-- Product Description -->
                         <div class="product-description">
                             <span>' . $row[6] . '</span>
-                            <a href="single-product-details.php">
-                                <h6>' . $row[1] . '</h6>
+                            <a href="single-product-details.php?id='.$id.'">
+                                <h6>'. $row[1] . '</h6>
                             </a>
                             <p class="product-price">$' . $row[3] . '</p>
    
@@ -179,6 +249,7 @@ $queryBeer = mysqli_query($conn, $selBeer);
                                         <input type="hidden" name="name" value ="' . $row[1] . '">
                                         <input type="hidden" name="sale_price" value ="' . $row[3] . '">
                                         <input type="hidden" name="image" value ="' . $row[4] . '">
+                                        <div style="color:red;">Qty:<input type="number" name="qty" value="1" ></div>
                                     </form>
                                 </div>
                             </div>
@@ -229,7 +300,7 @@ $queryBeer = mysqli_query($conn, $selBeer);
                         <!-- Product Description -->
                         <div class="product-description">
                             <span>' . $row[6] . '</span>
-                            <a href="single-product-details.php">
+                            <a href="single-product-details.php?id='.$id.'">
                                 <h6>' . $row[1] . '</h6>
                             </a>
                             <p class="product-price">$' . $row[3] . '</p>
@@ -245,6 +316,7 @@ $queryBeer = mysqli_query($conn, $selBeer);
                                         <input type="hidden" name="name" value ="' . $row[1] . '">
                                         <input type="hidden" name="sale_price" value ="' . $row[3] . '">
                                         <input type="hidden" name="image" value ="' . $row[4] . '">
+                                        <div style="color:red;">Qty:<input type="number" name="qty" value="1" ></div>
                                     </form>
                                 </div>
                             </div>

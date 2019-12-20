@@ -3,6 +3,7 @@ session_start();
 include('./db/conn.php');
 include('./testpt.php');
 include('./cart/add-cart.php');
+include('./show/show-account.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

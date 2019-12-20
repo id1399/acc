@@ -1,12 +1,15 @@
-<?php 
+<?php
 session_start();
 include('./cart/add-cart.php');
-if(!isset($_SESSION['username'])){
+if (!isset($_SESSION['username'])) {
     header('location: formlogin.php');
 }
 include('./show/show-account.php');
+include('./db/conn.php');
+include('./show/show-order.php')
 
- ?>
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,9 +33,9 @@ include('./show/show-account.php');
 </head>
 
 <body>
-<?php
+    <?php
     include('./abc/header.php')
-?>
+    ?>
 
     <!-- ##### Blog Wrapper Area Start ##### -->
     <div class="single-blog-wrapper">
@@ -50,12 +53,33 @@ include('./show/show-account.php');
                     </div>
                 </div>
                 <div class="grid-ctnn">
-                    <p><span>Họ tên : </span>&ensp; <?php echo $acc[4] ?></p>
-                    <p><span>Email : </span>&ensp; <?php echo $acc['email'] ?></p>
-                    <p><span>Mật khẩu : </span>&ensp; **************** &ensp;&ensp;&ensp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href="update-pwd.php?id=<?php echo $acc['id'] ?>">Chỉnh sửa</a></p>
-                    <p><span>Chức vụ : </span>&ensp; <?php echo $acc['name'] ?></p>
-                    <a href="./account-edit.php?id=<?php echo $acc[0] ?>">Chỉnh sửa thôn tin cá nhân >></a><br>
-                    <a href="./history.php">Lịch sử giao dịch</a>
+                <caption>Lịch sử giao dịch</caption>
+                    <table >
+                        <tr>
+                            <td>Mã Order</td>
+                            <td>Mã Sản phẩm</td>
+                            <td>Tên sản phẩm</td>
+                            <td>Ngày mua</td>
+                            <td>Giá gốc</td>
+                            <td>Số lượng</td>
+                            <td>Tổng tiền</td>
+                        </tr>  
+                        <?php while($row = mysqli_fetch_row($showQr_detail)) {
+                            echo '
+                            <tr>
+                                <td>'.$row[1].'</td>
+                                <td>'.$row[2].'</td>
+                                <td>'.$row[3].'</td>
+                                <td>'.$row[4].'</td>
+                                <td>'.$row[5].'</td>
+                                <td>'.$row[6].'</td>
+                                <td>'.$row[7].'</td>
+                            </tr>
+                            ';
+                        } ?>
+                        
+                    </table><br>
+                    <a href="history.php">Back To History</a>
                 </div>
             </div>
         </div>
@@ -83,29 +107,12 @@ include('./show/show-account.php');
 
 </html>
 <style>
-    .ctn{
-        display: grid;
-        grid-template-columns: 270px 1fr;
-        max-width: 980px;
-        margin: auto;
-        padding-top: 40px;
-        padding-bottom: 40px;
+    table{
+        width: 100%;
+        text-align: center;
     }
-    .box{
-        
-        width: 230px;
-        height: 230px;
-        float: left;
-        border: 1px solid #999999;
-    }
-    .grid-ctnn{
-        padding-top: 20px;
-    }
-    span{
-        font-weight: 500;
-        color: #000;
-    }
-    a{
-        color: blue;
+
+    td{
+        border: 1px solid ;
     }
 </style>

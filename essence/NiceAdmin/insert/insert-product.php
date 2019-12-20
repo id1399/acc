@@ -12,6 +12,11 @@
         $vldQr_pr = mysqli_query($conn,$vld_pr);
         $numVld_pr = mysqli_num_rows($vldQr_pr);
 
+        // $file_name="";
+        // if($img['size'] > 0){
+        //     $file_name='uploads/'.uniqid()."-".$img['name'];
+        //     move_uploaded_file($img['tmp_name'], $file_name);
+        // }
         if($numVld_pr == 1){
           $messeger = " Đã có loại hàng này ";
         }else if($name == ""){
@@ -27,6 +32,6 @@
           header('location: ./product.php');
         }
 
-        
+
       }
 ?>

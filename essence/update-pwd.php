@@ -7,7 +7,6 @@ include('./edit/edit-pwd.php');
 if(!isset($_SESSION['username'])){
     header('location: formlogin.php');
 }
-include('./show/show-account.php');
  ?>
 <!DOCTYPE html>
 <html lang="en">

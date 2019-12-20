@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 18, 2019 lúc 05:08 AM
+-- Thời gian đã tạo: Th12 20, 2019 lúc 05:49 AM
 -- Phiên bản máy phục vụ: 10.4.8-MariaDB
 -- Phiên bản PHP: 7.3.11
 
@@ -55,13 +55,22 @@ INSERT INTO `accounts` (`id`, `username`, `password`, `email`, `name`, `id_role`
 
 CREATE TABLE `bill_detail` (
   `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
+  `id_order` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `datetime` varchar(255) NOT NULL,
   `cost` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `bill_detail`
+--
+
+INSERT INTO `bill_detail` (`id`, `id_order`, `id_product`, `name`, `datetime`, `cost`, `quantity`, `total`) VALUES
+(23, 41, 19, 'Tet Gifts #1', '2019-12-19T17:24:15+0100', 161, 2, 322),
+(24, 41, 13, 'Tiger Beer (Lon)', '2019-12-19T17:24:15+0100', 77, 1, 77);
 
 -- --------------------------------------------------------
 
@@ -76,8 +85,16 @@ CREATE TABLE `bill_order` (
   `email` varchar(255) DEFAULT NULL,
   `phone` varchar(225) DEFAULT NULL,
   `note` text DEFAULT NULL,
+  `total` int(11) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `bill_order`
+--
+
+INSERT INTO `bill_order` (`id`, `id_user`, `name`, `email`, `phone`, `note`, `total`, `status`) VALUES
+(41, 1, 'Quyết nguyễnn', 'quyetnvph06340@fpt.edu.vn', '', '', 399, 2);
 
 -- --------------------------------------------------------
 
@@ -156,12 +173,21 @@ INSERT INTO `products` (`id`, `name`, `price`, `sale_price`, `image`, `descripti
 (14, 'Ha Noi Beer (lon)', NULL, '77', 'bia-hanoi.jfif', 'Bia Hà Nội , bia của những khát khao . Trúng ngay 1 chiếc ô tô nếu trúng thưởng nắp lon bia Hà nội', 'VIETNAM', 6, 16),
 (15, 'Heineken Beer (lon)', NULL, '76', 'bia-heineken-lon.jfif', 'Khẳng định đẳng cấp với bia Heineken', 'VIETNAM', 6, 16),
 (16, 'Sai Gon Beer (lon)', '', '80', 'sai-gon-bear.webp', 'Nước uống giải khát bia Sài Gòn', 'VIETNAM', 6, 16),
-(17, 'Cosy Pie', NULL, '20', 'banh-cosy.jpg', 'Mang lại hương vị ngày tết', 'VIETNAM', 7, 17),
+(17, 'Cosy Pie', NULL, '20', 'banh-cosy.jpg', 'Mang lại hương vị ngày tết', 'VIETNAM', 18, 17),
 (18, 'ChoCo - Pie', NULL, '23', 'chocopie.jfif', 'Đón xuân cùng ChoCo - Pie', 'VIETNAM', 11, 17),
-(19, 'Tet Gifts #1', '240', '161', 'ruou-tet.jpg', 'Combo quà tặng tết', 'VIETNAM', 35, 14),
-(20, 'Tet Gifts #2', '200', '140', 'sung-tuc.jpg', 'Combo quà tặng tết ', 'VIETNAM', 30, 14),
-(21, 'Tet Gifts #3', '189', '119', 'qua-tet.jpeg', 'Combo quà tặng tết', 'VIETNAM', 33, 14),
-(22, 'CoCaCoLa (lon)', NULL, '59', 'cocacola-lon.jpg', 'Nước uống giải khát - CoCaCoLa ', 'VIETNAM', 8, 18);
+(19, 'Tet Gifts #1', '240', '161', 'ruou-tet.jpg', 'Combo quà tặng tết', 'VIETNAM', 39, 14),
+(20, 'Tet Gifts #2', '200', '140', 'sung-tuc.jpg', 'Combo quà tặng tết ', 'VIETNAM', 33, 14),
+(21, 'Tet Gifts #3', '189', '119', 'qua-tet.jpeg', 'Combo quà tặng tết', 'VIETNAM', 36, 14),
+(22, 'CoCaCoLa (lon)', NULL, '59', 'cocacola-lon.jpg', 'Nước uống giải khát - CoCaCoLa ', 'VIETNAM', 8, 18),
+(40, 'Tet Gifts #4', '240', '168', 'girf-4.jfif', 'Combo gói quà tặng tết', 'VIETNAM', 0, 14),
+(41, 'Tet Gifts #5', '200', '140', 'gif5.jfif', 'Combo gói quà tặng tết', 'VIETNAM', 0, 14),
+(42, 'Tet Gifts #6', '169', '118', 'gif6.jpg', 'Combo gói quà tặng tết', 'VIETNAM', 0, 14),
+(43, 'Sting-Red', NULL, '230', 'sting-red.jpg', 'Nước uống giải khát - Sting diện mạo mới', 'VIETNAM', 0, 18),
+(44, 'Sting-Yellow', '230', '200', 'sting-yel.jpg', 'Nước uống giải khát - Sting diện mạo mới', 'VIETNAM', 0, 18),
+(45, 'Pepsi', '', '180', 'pep-si.jfif', 'Nước uống giải khát', 'VIETNAM', 0, 18),
+(46, 'Corn Candy', NULL, '23', 'keo-ngo.jfif', 'Kẹo bắp thơm ngon ', 'VIETNAM', 0, 17),
+(47, 'Red Bull', '300', '280', 'red-bull.jfif', 'Nước tăng lực bò húc ', 'VIETNAM', 0, 18),
+(48, 'Mứt Tet', NULL, '30', 'mut-tet.jpg', 'Mứt cho những ngày tết', 'VIETNAM', 0, 17);
 
 -- --------------------------------------------------------
 
@@ -273,8 +299,8 @@ ALTER TABLE `accounts`
 --
 ALTER TABLE `bill_detail`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_user` (`id_user`),
-  ADD KEY `id_product` (`id_product`);
+  ADD KEY `id_product` (`id_product`),
+  ADD KEY `bill_detail_ibfk_1` (`id_order`);
 
 --
 -- Chỉ mục cho bảng `bill_order`
@@ -303,7 +329,7 @@ ALTER TABLE `comments`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_category` (`id_category`);
+  ADD KEY `products_ibfk_1` (`id_category`);
 
 --
 -- Chỉ mục cho bảng `role`
@@ -351,13 +377,13 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT cho bảng `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT cho bảng `bill_order`
 --
 ALTER TABLE `bill_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
@@ -375,7 +401,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT cho bảng `role`
@@ -421,7 +447,7 @@ ALTER TABLE `accounts`
 -- Các ràng buộc cho bảng `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  ADD CONSTRAINT `bill_detail_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `accounts` (`id`),
+  ADD CONSTRAINT `bill_detail_ibfk_1` FOREIGN KEY (`id_order`) REFERENCES `bill_order` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `bill_detail_ibfk_2` FOREIGN KEY (`id_product`) REFERENCES `products` (`id`);
 
 --
@@ -442,7 +468,7 @@ ALTER TABLE `comments`
 -- Các ràng buộc cho bảng `products`
 --
 ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `categories` (`id`);
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `setting`

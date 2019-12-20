@@ -1,9 +1,6 @@
 <?php
-include('./role.php');
-include('./db/conect.php');
-
-$showPr_index = "SELECT * FROM setting_index";
-$queryS_index = mysqli_query($conn, $showPr_index);
+    include('./db/conect.php');
+    include('./quanlyhethong/show-order.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +13,7 @@ $queryS_index = mysqli_query($conn, $showPr_index);
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>Grids | Creative - Bootstrap 3 Responsive Admin Template</title>
+  <title>Form Component | Creative - Bootstrap 3 Responsive Admin Template</title>
 
   <!-- Bootstrap CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -26,6 +23,13 @@ $queryS_index = mysqli_query($conn, $showPr_index);
   <!-- font icon -->
   <link href="css/elegant-icons-style.css" rel="stylesheet" />
   <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <link href="css/daterangepicker.css" rel="stylesheet" />
+  <link href="css/bootstrap-datepicker.css" rel="stylesheet" />
+  <link href="css/bootstrap-colorpicker.css" rel="stylesheet" />
+  <!-- date picker -->
+
+  <!-- color picker -->
+
   <!-- Custom styles -->
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet" />
@@ -37,7 +41,7 @@ $queryS_index = mysqli_query($conn, $showPr_index);
       <script src="js/lte-ie7.js"></script>
     <![endif]-->
 
-  <!-- =======================================================
+    <!-- =======================================================
       Theme Name: NiceAdmin
       Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
       Author: BootstrapMade
@@ -50,86 +54,81 @@ $queryS_index = mysqli_query($conn, $showPr_index);
   <!-- container section start -->
   <section id="container" class="">
     <!--header start-->
-    <?php
-      include('./abc/header.php');
-    ?>
-    <!--header end-->
-
+  <?php include('../NiceAdmin/abc/header.php') ?>
     <!--sidebar start-->
-    <?php
-    include('body.php')
-    ?>
+  <?php include('../NiceAdmin/body.php') ?>
     <!--sidebar end-->
 
     <!--main content start-->
     <section id="main-content">
-      <section class=" wrapper">
+      <section class="wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h3 class="page-header"><i class="fa fa-tasks"></i> Grids</h3>
+            <h3 class="page-header"><i class="fa fa-th"></i>Button</h3>
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
               <li><i class="fa fa-desktop"></i>UI Fitures</li>
-              <li><i class="fa fa-tasks"></i>Grids</li>
+              <li><i class="fa fa-th"></i>button</li>
             </ol>
           </div>
         </div>
-
         <div class="row">
           <div class="col-sm-6" style="width: 100%;">
             <section class="panel">
               <table class="table">
                 <thead>
                   <tr>
-                    <th>#</th>
-                    <th>Logo</th>
-                    <th style="width: 20%">Banner</th>
-                    <th>Title Small</th>
-                    <th>Title</th>
-                    <th>..........</th>
+                    <th>Mã Order</th>
+                    <th>Mã Khách Hàng</th>
+                    <th>Tên</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Note</th>
+                    <th>Total</th>
+                    <th>Trạng thái</th>
+                    <th>---------</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <?php
-                    while ($row = mysqli_fetch_row($queryS_index)) {
-                      $id = $row[0];
-                      echo '
+                  <?php foreach ($order as $or): ?>
                       <tr>
-                        <td>#</td>
-                        <td><img style="width: 45px" src="../img/core-img/' . $row[1] . '" alt=""></td>
-                        <td><img style="width: 40%" src="../img/bg-img/' . $row[2] . '" alt=""></td>
-                        <td>'.$row[3].'</td>
-                        <td>'.$row[4].'</td>
-                        <td><button onclick="clickEdit(' . $id . ')">Sửa</button></td>
+                          <td><?php echo $or[0] ?></td>
+                          <td><?php echo $or[1] ?></td>
+                          <td><?php echo $or[2] ?></td>
+                          <td><?php echo $or[3] ?></td>
+                          <td><?php echo $or[4] ?></td>
+                          <td><?php echo $or[5] ?></td>
+                          <td><?php echo $or[6] ?></td>
+                          <td><?php echo $or[9] ?></td>
+                          <td><a href="order-detail.php?id=<?php echo $or[0] ?>">Chi tiết</a></td>
                       </tr>
-                        ';
-                    }
-                  ?>
-
+                    <?php endforeach ?>
                 </tbody>
               </table>
             </section>
           </div>
 
         </div>
+        <!-- page start-->
 
+
+        <!-- page end-->
       </section>
     </section>
     <!--main content end-->
     <div class="text-right">
       <div class="credits">
-        <!--
+          <!--
             All the links in the footer should remain intact.
             You can delete the links only if you purchased the pro version.
             Licensing information: https://bootstrapmade.com/license/
             Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
           -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
     </div>
   </section>
   <!-- container section end -->
-
   <!-- javascripts -->
   <script src="js/jquery.js"></script>
   <script src="js/bootstrap.min.js"></script>
@@ -137,18 +136,34 @@ $queryS_index = mysqli_query($conn, $showPr_index);
   <script src="js/jquery.scrollTo.min.js"></script>
   <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
 
-  <!--custome script for all page-->
+  <!-- jquery ui -->
+  <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+
+  <!--custom checkbox & radio-->
+  <script type="text/javascript" src="js/ga.js"></script>
+  <!--custom switch-->
+  <script src="js/bootstrap-switch.js"></script>
+  <!--custom tagsinput-->
+  <script src="js/jquery.tagsinput.js"></script>
+
+  <!-- colorpicker -->
+
+  <!-- bootstrap-wysiwyg -->
+  <script src="js/jquery.hotkeys.js"></script>
+  <script src="js/bootstrap-wysiwyg.js"></script>
+  <script src="js/bootstrap-wysiwyg-custom.js"></script>
+  <script src="js/moment.js"></script>
+  <script src="js/bootstrap-colorpicker.js"></script>
+  <script src="js/daterangepicker.js"></script>
+  <script src="js/bootstrap-datepicker.js"></script>
+  <!-- ck editor -->
+  <script type="text/javascript" src="assets/ckeditor/ckeditor.js"></script>
+  <!-- custom form component script for this page-->
+  <script src="js/form-component.js"></script>
+  <!-- custome script for all page -->
   <script src="js/scripts.js"></script>
 
 
 </body>
 
 </html>
-<script>
-  function clickEdit(id) {
-    var submit
-    if (submit = true) {
-      window.location.href = './edit_index.php?id=' + id;
-    }
-  }
-</script>
